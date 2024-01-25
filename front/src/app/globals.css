@@ -1,0 +1,39 @@
+:root {
+  --max-width: 1200px;
+
+  --header-button-border-color: #919191;
+  --header-button-font-size: 1rem;
+  --primary-button-color: #1976d2;
+  --primary-button-hover-color: #1565c0;
+  --secondary-button-color: #757575;
+  --secondary-button-hover-color: #424242;
+  --secondary-button-text: #cfcfcf;
+
+  --input-label-font-size: 0.875rem;
+  --input-height: 2.5rem;
+
+  --gutter: 1rem;
+
+  --lint-text-color: #1a73e8;
+  --lint-text-hover-color: #174ea6;
+
+  --error-text-color: #5f2120;
+  --error-text-background-color: #fdeded;
+}
+
+body {
+  margin: 0;
+  font-family: '-apple-system','BlinkMacSystemFont','"Hiragino Kaku Gothic ProN"','"Hiragino Sans"','Meiryo','sans-serif';
+}
+
+h1, h2, h3, h4 {
+  font-weight: inherit;
+}
+
+a {
+  color: var(--lint-text-color);
+}
+
+a:hover {
+  color: var(--lint-text-hover-color);
+}

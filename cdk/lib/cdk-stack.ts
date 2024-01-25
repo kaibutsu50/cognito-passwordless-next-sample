@@ -3,7 +3,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Passwordless } from "amazon-cognito-passwordless-auth/cdk";
 
-export class CdkStack extends cdk.Stack {
+export class CdkStackSample extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -13,11 +13,24 @@ export class CdkStack extends cdk.Stack {
         username: false,
         email: true,
       },
+      selfSignUpEnabled: true,
+    });
+
+    const userPoolClient = userPool.addClient("passwordlessClient", {
+      oAuth: {
+        callbackUrls: [
+          `${process.env.FRONTEND_URL!}/`,
+        ],
+        logoutUrls: [
+          `${process.env.FRONTEND_URL!}/`
+        ],
+      }
     });
 
     /** Add Passwordless authentication to the User Pool */
     const passwordless = new Passwordless(this, "Passwordless", {
       userPool,
+      userPoolClients: [userPoolClient],
       allowedOrigins: [
         process.env.FRONTEND_URL!
       ],
@@ -27,7 +40,7 @@ export class CdkStack extends cdk.Stack {
         ],
       },
       magicLink: {
-        sesFromAddress: process.env.SES_FROM_ADDRESS!,
+        sesFromAddress: process.env.EMAIL_FROM_ADDRESS!,
       },
     });
 
